@@ -7,6 +7,7 @@ import EstudianteEdit from "../views/EstudianteEdit.vue";
 import EstudianteDelete from "../views/EstudianteDelete.vue";
 import TelefonoEdit from "../views/TelefonoEdit.vue";
 import TelefonoDelete from "../views/TelefonoDelete.vue";
+import EstudianteAgregar from "../views/EstudianteAgregar.vue";
 
 const routes = [
   {
@@ -47,14 +48,20 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/estudiantes/telefono/edit/:estudianteUrl*",
+    path: "/estudiantes/nuevo",
+    name: "EstudianteAgregar",
+    component: EstudianteAgregar,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/telefono/edit/:telefonoUrl/:estudianteUrl",
     name: "TelefonoEdit",
     component: TelefonoEdit,
     props: true,
     meta: { requiresAuth: true },
   },
   {
-    path: "/estudiantes/telefono/delete/:estudianteUrl*",
+    path: "/telefono/delete/:telefonoUrl*:estudianteUrl*",
     name: "TelefonoDelete",
     component: TelefonoDelete,
     props: true,

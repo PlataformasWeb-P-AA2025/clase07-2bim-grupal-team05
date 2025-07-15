@@ -21,8 +21,8 @@
       </li>
     </ul>
     <p v-else>No hay estudiantes registrados.</p>
-    <router-link to="/estudiantes/nuevo" class="add-button"
-      >Agregar Nuevo Estudiante</router-link
+    <router-link :to="{ name: 'EstudianteAgregar' }" class="add-button"
+      >Agregar Estudiante</router-link
     >
   </div>
 </template>

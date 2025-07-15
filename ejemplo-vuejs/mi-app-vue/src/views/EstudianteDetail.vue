@@ -12,6 +12,7 @@
       <ul v-if="numerosTelefonicos.length">
         <li v-for="numero in numerosTelefonicos" :key="numero.url">
           {{ numero.telefono }} ({{ numero.tipo }})
+          <br />
           <router-link
             :to="{
               name: 'TelefonoDelete',
@@ -20,9 +21,20 @@
                 estudianteUrl: estudiante.url,
               },
             }"
-            class="back-button"
           >
             Eliminar
+          </router-link>
+          <br />
+          <router-link
+            :to="{
+              name: 'TelefonoEdit',
+              params: {
+                telefonoUrl: numero.url,
+                estudianteUrl: estudiante.url,
+              },
+            }"
+          >
+            Editar
           </router-link>
         </li>
       </ul>
@@ -46,14 +58,6 @@
         }"
         class="back-button"
         >Eliminar Estudiante</router-link
-      >
-      <router-link
-        :to="{
-          name: 'TelefonoEdit',
-          params: { estudianteUrl: estudianteUrl, telefonoUrl: telefonoUrl },
-        }"
-        class="back-button"
-        >Editar Telefono</router-link
       >
     </div>
     <p v-else>Estudiante no encontrado.</p>

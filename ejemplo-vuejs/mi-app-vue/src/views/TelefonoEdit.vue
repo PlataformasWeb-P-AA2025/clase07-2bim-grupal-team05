@@ -3,25 +3,25 @@
     <h2>Editar Telefono</h2>
     <p v-if="loading">Cargando detalles...</p>
     <p v-if="error" class="error-message">{{ error }}</p>
-    <div v-else-if="estudiante">
-      <form @submit.prevent="updateEstudiante">
+    <div v-else-if="telefono">
+      <form @submit.prevent="updateTelefono">
         <div class="form-group">
           <label for="telefono">Telefono:</label>
           <input
             type="text"
             id="telefono"
-            v-model="estudiante.telefono"
+            v-model="telefono.telefono"
             required
           />
         </div>
         <div class="form-group">
           <label for="tipo">Tipo:</label>
-          <input type="text" id="tipo" v-model="estudiante.tipo" required />
+          <input type="text" id="tipo" v-model="telefono.tipo" required />
         </div>
         <button type="submit">Actualizar</button>
       </form>
     </div>
-    <p v-else>Estudiante no encontrado.</p>
+    <p v-else>Telefono no encontrado.</p>
 
     <router-link
       :to="{
@@ -42,21 +42,22 @@ export default {
   props: ["estudianteUrl", "telefonoUrl"],
   data() {
     return {
-      estudiante: null,
+      telefono: null,
       loading: true,
       error: null,
     };
   },
   async created() {
-    await this.fetchEstudianteDetail(this.telefonoUrl);
+    console.log("telefonoUrl recibida:", this.telefonoUrl);
+    await this.fetchTelefonoDetail(this.telefonoUrl);
   },
   methods: {
-    async fetchEstudianteDetail(url) {
+    async fetchTelefonoDetail(url) {
       try {
         this.loading = true;
         this.error = null;
         const response = await api.get(url);
-        this.estudiante = response.data;
+        this.telefono = response.data;
       } catch (err) {
         console.error(
           "Error al cargar detalle del telefono:",
@@ -67,12 +68,12 @@ export default {
         this.loading = false;
       }
     },
-    async updateEstudiante() {
+    async updateTelefono() {
       try {
         this.loading = true;
         this.error = null;
-        const response = await api.put(this.telefonoUrl, this.estudiante);
-        this.estudiante = response.data;
+        const response = await api.put(this.telefonoUrl, this.telefono);
+        this.telefono = response.data;
       } catch (err) {
         console.error("Error al actualizar el telefono:", err.response || err);
         this.error = "No se pudo actualizar el telefono.";

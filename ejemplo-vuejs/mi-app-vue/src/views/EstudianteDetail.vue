@@ -12,6 +12,18 @@
       <ul v-if="numerosTelefonicos.length">
         <li v-for="numero in numerosTelefonicos" :key="numero.url">
           {{ numero.telefono }} ({{ numero.tipo }})
+          <router-link
+            :to="{
+              name: 'TelefonoDelete',
+              params: {
+                telefonoUrl: numero.url,
+                estudianteUrl: estudiante.url,
+              },
+            }"
+            class="back-button"
+          >
+            Eliminar
+          </router-link>
         </li>
       </ul>
       <p v-else>No tiene números telefónicos registrados.</p>
@@ -25,7 +37,7 @@
           params: { estudianteUrl: estudianteUrl },
         }"
         class="back-button"
-        >Editar</router-link
+        >Editar Estudiante</router-link
       >
       <router-link
         :to="{
@@ -33,7 +45,15 @@
           params: { estudianteUrl: estudianteUrl },
         }"
         class="back-button"
-        >Eliminar</router-link
+        >Eliminar Estudiante</router-link
+      >
+      <router-link
+        :to="{
+          name: 'TelefonoEdit',
+          params: { estudianteUrl: estudianteUrl, telefonoUrl: telefonoUrl },
+        }"
+        class="back-button"
+        >Editar Telefono</router-link
       >
     </div>
     <p v-else>Estudiante no encontrado.</p>
@@ -45,7 +65,7 @@ import api from "@/api/axios";
 
 export default {
   name: "EstudianteDetail",
-  props: ["estudianteUrl"], // <-- Ahora recibe 'estudianteUrl' como prop
+  props: ["estudianteUrl", "telefonoUrl"], // <-- Ahora recibe 'estudianteUrl' como prop
   data() {
     return {
       estudiante: null,

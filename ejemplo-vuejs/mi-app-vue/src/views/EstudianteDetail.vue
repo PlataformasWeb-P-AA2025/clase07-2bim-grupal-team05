@@ -19,6 +19,22 @@
       <router-link :to="{ name: 'EstudiantesList' }" class="back-button"
         >Volver al Listado</router-link
       >
+      <router-link
+        :to="{
+          name: 'EstudianteEdit',
+          params: { estudianteUrl: estudianteUrl },
+        }"
+        class="back-button"
+        >Editar</router-link
+      >
+      <router-link
+        :to="{
+          name: 'EstudianteDelete',
+          params: { estudianteUrl: estudianteUrl },
+        }"
+        class="back-button"
+        >Eliminar</router-link
+      >
     </div>
     <p v-else>Estudiante no encontrado.</p>
   </div>
